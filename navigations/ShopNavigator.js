@@ -8,9 +8,11 @@ const ProductNavigator = createStackNavigator({
     ProductsOverview : ProductOverviewScreen
 }, {
     defaultNavigationOptions: {
-        backgroundColor: 'red'
-    },
-    headerTintColor: Platform.OS ==='android' ? 'white' : Colors.primary
+        headerStyle:{
+            backgroundColor: Platform.OS === 'android' ? Colors.primary : ''
+        },
+        headerTintColor: Platform.OS ==='android' ? 'white' : Colors.primary
+    }
 });
 
 export default createAppContainer(ProductNavigator);

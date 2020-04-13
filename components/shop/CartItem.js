@@ -3,7 +3,6 @@ import { View,StyleSheet, Text,TouchableOpacity, Platform } from 'react-native';
 import {Ionicons} from '@expo/vector-icons'
 
 const CartItem = props => { 
-    console.log(props.title);
     return <View style={styles.cartItems}>
         <View style={styles.itemData}>
             <Text style={styles.quantity}>{props.quantity}  </Text>
@@ -27,7 +26,7 @@ const styles= StyleSheet.create ({
         backgroundColor: 'white',
         flexDirection:'row',
         justifyContent: 'space-between',
-        marginHorizontal: 20,
+        marginHorizontal: 1,
         flexWrap: 'wrap'
     },
     itemData:{

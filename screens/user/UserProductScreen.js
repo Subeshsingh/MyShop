@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList,Button,Alert,Platform} from 'react-native';
+import { FlatList,Button,Alert,Platform,View,Text} from 'react-native';
 import { useSelector ,useDispatch} from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../../components/UI/HeaderButton';
@@ -24,6 +24,13 @@ const UserProductScreen = props => {
     const editProductHandler = id => {
         props.navigation.navigate('EditProduct',{productId: id});
     } 
+    if (userProducts.length === 0) {
+        return (
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>No products found, maybe start adding some products?</Text>
+          </View>
+        );
+      }
     return <FlatList data={userProducts} keyExtractor={item => item.id}
                 renderItem={itemData => <ProductItem image={itemData.item.imageUrl}
                                             title={itemData.item.title}

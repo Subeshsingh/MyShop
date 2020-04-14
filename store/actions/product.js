@@ -7,8 +7,9 @@ export const SET_PRODUCTS = 'SET_PRODUCTS';
 
 
 export const fetchProducts = () => {
-        return async dispatch => {
+        return async (dispatch,getState) => {
             //any async code you want
+            const userId = getState().auth.userId;
             try{
                 const response = await fetch (
                     'https://myshop-b2795.firebaseio.com/products.json'
@@ -25,7 +26,7 @@ export const fetchProducts = () => {
                     loadedProducts.push(
                         new Product(
                             key,
-                            'u1',
+                            resData[key].ownerId,
                             resData[key].title,
                             resData[key].imageUrl,
                             resData[key].description,
@@ -35,7 +36,11 @@ export const fetchProducts = () => {
                 }
                 console.log( `fetching products` + resData);
                 console.log("HEllo" + loadedProducts);
-                dispatch({type: SET_PRODUCTS, products: loadedProducts})
+                dispatch({
+                     type: SET_PRODUCTS, 
+                     products: loadedProducts,
+                     userProducts: loadedProducts.filter(prod => prod.ownerId === userId)
+                    });
             }
             catch(err) {
                 //send t custom analytics server
